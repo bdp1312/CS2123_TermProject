@@ -1,0 +1,9 @@
+#gitignore for Term_Project
+
+#ignored file types
+  #name executables <fileName>.exe to keep git from tracking them
+  *.exe
+
+  a.out
+
+#ignored directories

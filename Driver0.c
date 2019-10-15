@@ -1,12 +1,20 @@
 #include<stdio.h>
 #include<string.h>
-
+#include"ArrayLib.h"//testing compilation of ArrayLib
 
 
 int main(){
-	int mode, input;
+// MENU SECTION
+/*The menu should prompt user to input data coresponding to
+what datatype they want to use, what sorting method they use,
+what sorting algorithm they use, and what element to search
+for.*/
+	int mode, input; //declares input and mode.
+	//mode is sorting algorthm varriable
+	/*input is a catch all varriable to avoid user input going directly into
+	other varriables*/
 	scanf("%d",&input);
-	if(input==1){mode+=6;}
+	if(input==1){mode+=6;} //recomend putting scanf's into do wile loops
 	input=0;
 	while(input>6 || input<1){
 		scanf("%d",&input);
@@ -26,7 +34,6 @@ int main(){
 	else if(mode==12){}
 	else{}
 
+	return 0;
+
 }
-
-
-
