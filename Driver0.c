@@ -1,40 +1,176 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
+#include "SortFunctions.h"
 //#include"ArrayLib.h"//testing compilation of ArrayLib
 //#include"Searches.h"
 #include"BubbleSort.h"
 
-int main(){
-// MENU SECTION
 /*The menu should prompt user to input data coresponding to
 what datatype they want to use, what sorting method they use,
 what sorting algorithm they use, and what element to search
 for.*/
-	int mode, input; //declares input and mode.
-	//mode is sorting algorthm varriable
-	/*input is a catch all varriable to avoid user input going directly into
-	other varriables*/
-	scanf("%d",&input);
-	if(input==1){mode+=6;} //recomend putting scanf's into do wile loops
-	input=0;
-	while(input>6 || input<1){
-		scanf("%d",&input);
-	}
-	mode+=input;
-	if(mode==1){}
-	else if(mode==2){}
-	else if(mode==3){}
-	else if(mode==4){}
-	else if(mode==5){}
-	else if(mode==6){}
-	else if(mode==7){}
-	else if(mode==8){}
-	else if(mode==9){}
-	else if(mode==10){}
-	else if(mode==11){}
-	else if(mode==12){}
-	else{}
 
-	return 0;
+int main()
+{
+    printf("Choose your sorting algorithm:\n1. Bubble sort\n2. Selection sort\n3. Insertion sort\n"
+            "4. Merge sort\n5. Quick sort\n6. Radix sort\n7. Heap sort\n");
+    int mode;
+    scanf("%d", &mode);
+    printf("Choose your array type:\ni. Integer\ns. String\n");
+    char type;
+    scanf("%c", &type);
+    printf("Choose your search algorithm:\nl. Linear search\nb. Binary search");
+    char search;
+    scanf("%c", &type);
+
+
+    if(type == 's')
+    {
+        char *strArr[] = {"AAAAA", "a", "AAA", "aaaa", "AAa", "AAAAa", "AAa", "A", "aa", "Aaa"};
+        int strArrLen = sizeof(strArr)/sizeof(strArr[0]);
+        if(mode == 1) //bubble sort
+        {
+
+        }
+        else if(mode == 2) //selection sort
+        {
+            selectionString(strArr, strArrLen);
+        }
+        else if(mode == 3) //insertion sort
+        {
+            insertionString(strArr, strArrLen);
+        }
+        else if(mode == 4) //merge sort
+        {
+
+        }
+        else if(mode == 5) //quick sort
+        {
+
+        }
+        else if(mode == 6) //radix sort
+        {
+            radixSortStr(strArr, strArrLen);
+        }
+        else if(mode == 7) //heap sort
+        {
+            heapSortString(strArr, strArrLen);
+        }
+        else
+        {
+            printf("Not a valid option for sorting\n");
+            main();
+        }
+    }
+    else if(type == 'i')
+    {
+        int intArr[] = {654, 18, 81, 4, 92, 68, 145, 8, 99, 36};
+        int intArrLen = sizeof(intArr)/sizeof(intArr[0]);
+        if(mode == 1) //bubble sort
+        {
+
+        }
+        else if(mode == 2) //selection sort
+        {
+            selectionInt(intArr, intArrLen);
+        }
+        else if(mode == 3) //insertion sort
+        {
+            insertionInt(intArr, intArrLen);
+        }
+        else if(mode == 4) //merge sort
+        {
+
+        }
+        else if(mode == 5) //quick sort
+        {
+
+        }
+        else if(mode == 6) //radix sort
+        {
+            radixSortInt(intArr, intArrLen);
+        }
+        else if(mode == 7) //heap sort
+        {
+            heapSortInt(intArr, intArrLen);
+        }
+        else
+        {
+            printf("Not a valid option for sorting\n");
+            main();
+        }
+    }
+    else
+    {
+        printf("Not a valid option for string type\n");
+        main();
+    }
+
+    if(search == 'l' || search == 'L') //linear search
+    {
+        int found;
+        int target;
+
+        if(type == 'i' || type == 'I')
+        {
+            int target;
+            printf("Enter target integer: ");
+            scanf("%d", &target);
+            //found = linIntArraySearch(intArr, intArrLen, target);
+        }
+        else
+        {
+            char *target;
+            printf("Enter target string: ");
+            scanf("%s", target);
+            //found = linStringArraySearch(strArr, strArrLen, target);
+        }
+
+        if(found > 0)
+        {
+            printf("Found\n");
+        }
+        else
+        {
+            printf("Not found\n");
+        }
+    }
+    else if(search == 'b' || search == 'B') //binary search
+    {
+        int found;
+        int target;
+
+        if(type == 'i' || type == 'I')
+        {
+            int target;
+            printf("Enter target integer: ");
+            scanf("%d", &target);
+            //found = biIntArraySearch(intArr, intArrLen, target);
+        }
+        else
+        {
+            char *target;
+            printf("Enter target string: ");
+            scanf("%s", target);
+            //found = biStringArraySearch(strArr, strArrLen, target);
+        }
+
+        if(found > 0)
+        {
+            printf("Found\n");
+        }
+        else
+        {
+            printf("Not found\n");
+        }
+    }
+    else
+    {
+        printf("Not a valid option for searching\n");
+        main();
+    }
+}
+
+
 
 }
