@@ -10,11 +10,11 @@ int isValidIndex(int targetIndex, int workingLength){
 }
 //isValidIndex() curantly unused
 
-int insertIntElement(int ** myArray, int targetIndex, int numElements, int newElement){
+int insertIntElement(int * myArray, int targetIndex, int numElements, int newElement){
   // if(isValidIndex(targetIndex, numElements)==0){
   //   return 0;
   // }else{
-    *myArray[numElements] = newElement;
+    myArray[numElements] = newElement;
     int i;
     for(i=numElements;i>targetIndex; --i){
       swapIntElement(myArray, i, i-1);
@@ -24,7 +24,7 @@ int insertIntElement(int ** myArray, int targetIndex, int numElements, int newEl
 }
 
 
-int removeIntElement(int **myArray, int targetIndex, int numElements){
+int removeIntElement(int *myArray, int targetIndex, int numElements){
   int i;
     for(i=numElements-1; i>targetIndex;--i){
       swapIntElement(myArray, i, i-1);
@@ -33,29 +33,29 @@ int removeIntElement(int **myArray, int targetIndex, int numElements){
 }
 
 
-int swapIntElement(int **myArray, int firstIndex, int secondIndex){
+int swapIntElement(int *myArray, int firstIndex, int secondIndex){
   // if(isValidIndex(firstIndex, numElements)==0 || isValidIndex(secondIndex, numElements) == 0){
   //   return 0; //returns failure if array length isn't greather than both indexes
   // } else {    //else swap the values
-    int tempVal = *myArray[firstIndex];
-    *myArray[firstIndex] = *myArray[secondIndex];
-    *myArray[secondIndex] = tempVal;
+    int tempVal = myArray[firstIndex];
+    myArray[firstIndex] = myArray[secondIndex];
+    myArray[secondIndex] = tempVal;
 //  }
   return 1;
 }
 
 
 
-int insertStringElement(char ***myArray, int targetIndex, int numElements, char *newElement){
+int insertStringElement(char **myArray, int targetIndex, int numElements, char *newElement){
   return 1;
 }
 
 
-int removeStringElement(char ***myArray, int targetIndex, int numElements){
+int removeStringElement(char **myArray, int targetIndex, int numElements){
   return 1;
 }
 
 
-int swapStringElement(char ***myArray, int firstIndex, int secondIndex){
+int swapStringElement(char **myArray, int firstIndex, int secondIndex){
   return 1;
 }

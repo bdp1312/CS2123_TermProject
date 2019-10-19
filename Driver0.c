@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include<string.h>
-#include"ArrayLib.h"//testing compilation of ArrayLib
-
+//#include"ArrayLib.h"//testing compilation of ArrayLib
+//#include"Searches.h"
+#include"BubbleSort.h"
 
 int main(){
 // MENU SECTION
