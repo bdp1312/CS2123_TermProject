@@ -4,23 +4,46 @@
 
 void mergeInt(int arr[],int low, int mid, int high)
 {
-  int sizeLeft; //calculate size of left and right subArrays
-  int sizeRight;
+  int sizeLeft=mid-low+1; //calculate size of left and right subArrays
+  int sizeRight=high-mid;
 
   //Allocate memory for left subarray
+  int *subLeft = malloc(sizeof(int)*sizeLeft);
+
   //Allocate memory for right subarray
+  int *subRight = malloc(sizeof(int)*sizeRight);
 
-  //copy elements form arr to Left
+  //copy elements from arr to Left
+  int i;
+  for(i=0;i<sizeLeft;++i){
+    subLeft[i] = arr[low+i];
+  }
+
   //copy elements from arr to Right
+  for(i=0;i<sizeRight;++i){
+    subRight[i]=arr[low+i];
+  }
 
+  i = 0;
+  int k = low, j = 0;
   //while both Left and Right are < sizeLeft and sizeRight, respectivly
+  while(){
 
+  }
   //copy into arr starting from arr[low]
 
-  //check if Left[i] > Right[i]
-  //if true
-  //
-
+  //check if Left[i] < Right[j]
+    //copy left to arr if true
+    //increment k, i
+  //else
+    //copy right to arr
+    //increment k, j
+  //while i less than sizeLeft
+    //copy left to arr
+    //increment k, i
+  //while i less than sizeLeft
+    //copy left to arr
+    //increment k, i
 }
 void mergeIntSort(int arr[],int low, int high)
 {
