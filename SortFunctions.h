@@ -13,7 +13,3 @@ void heapSortString(char *arr[], int arrLen);
 void heapifyString(char *arr[], int arrLen, int i);
 void heapSortInt(int arr[], int n);
 void heapifyInt(int arr[], int n, int i);
-
-
-
-

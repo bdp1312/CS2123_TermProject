@@ -1,5 +1,8 @@
 //Library For Array Functions common to multiple Sort/Merdge algorithms
 
+#include <stdlib.h>
+#include <string.h>
+
 #include"ArrayLib.h"
 
 //returns 1 for true, 0 for false
@@ -57,5 +60,13 @@ int removeStringElement(char **myArray, int targetIndex, int numElements){
 
 
 int swapStringElement(char **myArray, int firstIndex, int secondIndex){
+  //char *temp=malloc(sizeof(myArray[firstIndex]));
+  // strcpy(temp, myArray[firstIndex]);
+  char *temp=myArray[firstIndex];
+  // strcpy(myArray[firstIndex], myArray[secondIndex]);
+  myArray[firstIndex]=myArray[secondIndex];
+  // strcpy(myArray[secondIndex], temp);
+  myArray[secondIndex]=temp;
+  //free(temp);
   return 1;
 }

@@ -5,31 +5,14 @@
 void appendStringArr(char *string, char c, int arrayLength);
 void selectionInt(int pptargetArray[], int sizeOfArray);
 void selectionString(char *ptargetArray[], int sizeOfArray);
-/*
-int main(int argc, char** argv)
-{
-    int unsorted[10] = {654, 18, 81, 4, 92, 68, 145, 8, 99, 36};
-    char *unstrings[10] = {"AAAAA", "a", "AAA", "aaaa", "AAa", "AAAAa", "AAa", "A", "aa", "Aaa"};
-    int i;
-    
-    selectionInt(unsorted, 10);
-    selectionString(10, unstrings, 10);
-    
-    for(i = 0; i <= 9; i++)
-    {
-        printf("%d\n", unsorted[i]);
-    }
-    
-    return (EXIT_SUCCESS);
-}
-*/
+
 void selectionInt(int targetArray[], int sizeOfArray)
 {
     int i;
     int j;
     int temp;
     int lowestInd = 0;
-    
+
     for(i = 0; i <= sizeOfArray-2; i++)
     {
         lowestInd = i;
@@ -45,14 +28,14 @@ void selectionInt(int targetArray[], int sizeOfArray)
         targetArray[lowestInd] = temp;
     }
 }
- 
+
 void selectionString(char *ptargetArray[], int sizeOfArray)
 {
     int i;
     int j;
     char *temp;
     int lowestInd = 0;
-    
+
     for(i = 0; i <= sizeOfArray - 1; i++)
     {
         lowestInd = i;
@@ -68,3 +51,23 @@ void selectionString(char *ptargetArray[], int sizeOfArray)
         }
     }
 }
+
+// int main(int argc, char** argv)
+// {
+//     int unsorted[10] = {654, 18, 81, 4, 92, 68, 145, 8, 99, 36};
+//     char *unstrings[10] = {"AAAAA", "a", "AAA", "aaaa", "AAa", "AAAAa", "AAa", "A", "aa", "Aaa"};
+//     int i;
+//
+//     selectionInt(unsorted, 10);
+//     selectionString(unstridngs, 10);
+//
+//     for(i = 0; i <= 9; i++)
+//     {
+//         printf("%d\n", unsorted[i]);
+//     }
+//     for(i = 0; i <= 9; i++)
+//     {
+//         printf("%s\n", unstrings[i]);
+//     }
+//     return (EXIT_SUCCESS);
+// }

@@ -4,7 +4,7 @@
 int linIntArraySearch(int *myArray, int sizeOfArray, int soughtElement);
 
 
-int linStringAraySearch(char **myArray, int sizeOfArray, char *soughtElement);
+int linStringArraySearch(char **myArray, int sizeOfArray, char *soughtElement);
 
 
 int biIntArraySearch(int *myArray, int sizeOfArray, int soughtElement);

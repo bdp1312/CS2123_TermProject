@@ -3,6 +3,6 @@
 
 void quickIntSort(int arr[], int low, int high);
 
-void quickIntSort(char *arr[], int low, int high);
+void quickStrSort(char *arr[], int low, int high);
 
 #endif
