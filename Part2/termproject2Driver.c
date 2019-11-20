@@ -30,11 +30,6 @@ int numArraySizes;
 //Array sizes
 int * arraySizes;
 
-//[Benjamin] Data structure for reuslts
-typedef struct testResult{
-
-} testResult;
-
 int main(int argc, char * argv[]) {
 
 	processCMDArgs(argc, argv);
