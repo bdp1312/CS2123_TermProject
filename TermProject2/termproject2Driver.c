@@ -30,7 +30,7 @@ int numArraySizes;
 //Array sizes
 int * arraySizes;
 
-//[Benjamin] Data structure for reuslts
+//[Benjamin] Data structure for results
 typedef struct testResult{
 
 } testResult;
