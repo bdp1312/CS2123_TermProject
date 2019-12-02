@@ -50,6 +50,8 @@ int main(int argc, char * argv[])
 {
     processCMDArgs(argc, argv);
 
+
+
 	//For debugging purposes.
 	//Remove all printJobStatus() calls before creating
 	//final output and before submitting.
