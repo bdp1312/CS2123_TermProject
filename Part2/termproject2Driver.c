@@ -8,6 +8,22 @@
 void processCMDArgs(int argc, char * argv[]);
 void printJobStatus();
 
+//Structs
+typedef struct trialNode{
+    long double trial1;
+    long double trial2;
+    long double trial3;
+    long double trial4;
+    long double average;
+    int size;
+}trialNode;
+
+typedef struct masterNode{
+    trialNode *intTrials;
+    trialNode *stringTrials;
+}masterNode;
+
+
 //Global Variables
 //0 == print sorted array, 1 == print time table
 int printType;
@@ -30,92 +46,212 @@ int numArraySizes;
 //Array sizes
 int * arraySizes;
 
-int main(int argc, char * argv[]) {
+int main(int argc, char * argv[])
+{
+    processCMDArgs(argc, argv);
 
-	processCMDArgs(argc, argv);
+
 
 	//For debugging purposes.
 	//Remove all printJobStatus() calls before creating
 	//final output and before submitting.
-	printJobStatus();
+    printJobStatus();
+
+    masterNode *masterQuick = malloc(sizeof(masterNode));
+    masterNode *masterMerge = malloc(sizeof(masterNode));
+    masterNode *masterRadix = malloc(sizeof(masterNode));
+    masterNode *masterHeap = malloc(sizeof(masterNode));
+    masterNode *masterInsertion = malloc(sizeof(masterNode));
+    masterNode *masterSelection = malloc(sizeof(masterNode));
 
 
-	/*
-		It is up to you to implement the rest of the project.
+    if(sortType == 0)
+    {
+        int i;
+        int j;
+        int highest = 0;
+        int lowest = 0;
+        int temp;
+        clock_t start_t, end_t, total_t;
 
-[Benjamin]-EXTRA CREDIT (low priority?)
-		processCMDArgs will reject array sizes larger than 75000.
-		If you want to do the extra credit, modify processCMDArgs
-		to accept the larger array sizes.
+        for(i = 0; i < numArraySizes; i++)
+        {
+            int * array = (int *) malloc (arraySizes[i] * sizeof(int));
+            for(j = 0; j < arraySizes[i]; j++)
+            {
+                temp = randNum();
+                if(temp > highest)
+                {
+                    highest = temp;
+                }
+                else if(temp < lowest)
+                {
+                    lowest = temp;
+                }
+                array[j] = temp;
+            }
+            switch (sortAlg)
+            {
+                case 1:
+                    start_t = clock();
+                    quickSort_int(array, lowest, highest);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterQuick->intTrials->trial1;
+                    break;
+                case 2:
+                    start_t = clock();
+                    mergeSort_int(array, lowest, highest);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterMerge->intTrials->trial1;
+                    break;
+                case 3:
+                    start_t = clock();
+                    radixSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterRadix->intTrials->trial1;
+                    break;
+                case 4:
+                    start_t = clock();
+                    heapSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterHeap->intTrials->trial1;
+                    break;
+                case 5:
+                    start_t = clock();
+                    insertionSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterInsertion->intTrials->trial1;
+                    break;
+                case 6:
+                    start_t = clock();
+                    selectionSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterSelection->intTrials->trial1;
+                    break;
+                case 7:
+                    start_t = clock();
+                    quickSort_int(array, lowest, highest);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterQuick->intTrials->trial1;
 
-		For sorting strings:
-			Create the array for strings like this:
-				char array[arraySizes[numExperiments-1]][MAX_LEN];
+                    start_t = clock();
+                    mergeSort_int(array, lowest, highest);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterMerge->intTrials->trial1;
+
+                    start_t = clock();
+                    radixSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterRadix->intTrials->trial1;
+
+                    start_t = clock();
+                    heapSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterHeap->intTrials->trial1;
+
+                    start_t = clock();
+                    insertionSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterInsertion->intTrials->trial1;
+
+                    start_t = clock();
+                    selectionSort_int(array, arraySizes[i]);
+                    end_t = clock();
+                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    masterSelection->intTrials->trial1;
+                    break;
+            }
+            free(array);
+        }
+    }
+
+    free(arraySizes);
+
+    /*
+      It is up to you to implement the rest of the project.
+
+  [Benjamin]-EXTRA CREDIT (low priority?)
+      processCMDArgs will reject array sizes larger than 75000.
+      If you want to do the extra credit, modify processCMDArgs
+      to accept the larger array sizes.
+
+      For sorting strings:
+        Create the array for strings like this:
+          char array[arraySizes[numExperiments-1]][MAX_LEN];
 
 
-			This will create an array that can hold the largest
-			number of inputs.  Using this larger array to process
-			smaller number of inputs will be ok.
+        This will create an array that can hold the largest
+        number of inputs.  Using this larger array to process
+        smaller number of inputs will be ok.
 
-			**Declare the string array ONCE at the top of your
-			  function then reuse it.  DO NOT declare a string
-			  array for each array size.**
+        **Declare the string array ONCE at the top of your
+          function then reuse it.  DO NOT declare a string
+          array for each array size.**
 
-			You do not need to free this type of variable.
+        You do not need to free this type of variable.
 
-			radixSort on strings will not work with this type of variable.
-			radixSort on strings is for extra credit.
+        radixSort on strings will not work with this type of variable.
+        radixSort on strings is for extra credit.
 
-		For sorting integers:
-			Create the array for ints like this:
-				int * array = (int *) malloc (arraySizes[i] * sizeof(int));
+      For sorting integers:
+        Create the array for ints like this:
+          int * array = (int *) malloc (arraySizes[i] * sizeof(int));
 
-			You can create the array, fill it, sort it, then free it
-			for each array size.  REMEMBER to free it!
+        You can create the array, fill it, sort it, then free it
+        for each array size.  REMEMBER to free it!
 
-			Use randNum() to get each random number for the integer arrays.
+        Use randNum() to get each random number for the integer arrays.
 
-		Google 'c clock' to find out how to time your sorting functions.
-		*/
-		//Use this timeing scheme
-		// clock_t startTime = clock();
-		// clock_t endTime = clock();
-		// clock_t totalTime = startTime - endTime;
-		/*
+      Google 'c clock' to find out how to time your sorting functions.
+      */
+      //Use this timeing scheme
+      // clock_t startTime = clock();
+      // clock_t endTime = clock();
+      // clock_t totalTime = startTime - endTime;
+      /*
 
-		If quick sort and other faster sorts report a time of 0.0, that is ok.
-		Report 0.0 if that is the result.  Longer arrays and other sorts should
-		produce a visible time.
+      If quick sort and other faster sorts report a time of 0.0, that is ok.
+      Report 0.0 if that is the result.  Longer arrays and other sorts should
+      produce a visible time.
 
-		Create a data structure to store the results of all your experiments,
-		then print out everything at once.
+      Create a data structure to store the results of all your experiments,
+      then print out everything at once.
 
-		To run your program in the background:
-			$ nohup ./project # # # # # > output.txt &
+      To run your program in the background:
+        $ nohup ./project # # # # # > output.txt &
 
-		When running in the background and you haven't logged out of the server,
-		to see your currently running programs type:
-			$ jobs
+      When running in the background and you haven't logged out of the server,
+      to see your currently running programs type:
+        $ jobs
 
-		If you have logged out, type:
-			$ ps aux | grep 'abc123'
+      If you have logged out, type:
+        $ ps aux | grep 'abc123'
 
-		If you want to kill the ./project process:
-			$ kill 'process id number'
+      If you want to kill the ./project process:
+        $ kill 'process id number'
 
-		Server Info
-		DO NOT use the fox servers for this assignment
+      Server Info
+      DO NOT use the fox servers for this assignment
 
-		in the lab $ ssh abc123@hen01.cs.utsarr.net
-		outside    $ ssh abc123@10.100.240.211
+      in the lab $ ssh abc123@hen01.cs.utsarr.net
+      outside    $ ssh abc123@10.100.240.211
 
-		Email Josh if you crash the server.
-	*/
+      Email Josh if you crash the server.
+    */
 
 
-	free(arraySizes);
-
-	return 0;
+    return 0;
 }
 
 
