@@ -42,6 +42,9 @@ int * arraySizes;
 
 int main(int argc, char * argv[])
 {
+
+  int i, j, k; //counter Variables
+
     processCMDArgs(argc, argv);
 
 
@@ -61,19 +64,22 @@ int main(int argc, char * argv[])
     //total number of trialNode structures required by args
     int numTrialNodes;
 
+    //calculate number of trials = number of array sizes * number of sort algorithms
     if(sortAlg!=7){
       numTrialNodes=numArraySizes;
     } else {
-      numTrialNodes=numArraySizes*7;
+      numTrialNodes=numArraySizes*6;
     }
 
+    masterNode testResults=malloc(sizeof(trialNode)*numTrialNodes);
 
-    masterNode testResults=malloc(sizeof(trialNode)*numTrialNodes;
-
+    //each trail node should contain array of double the size of the number of trials
+    for(i=0;i<numTrialNodes;i++){
+        testResults[i].timeTrials= malloc(sizeof(double)*numTrials);
+    }
 
     if(sortType == 0)
     {
-        int i;
         int j;
         int highest = 0;
         int lowest = 0;
@@ -82,102 +88,193 @@ int main(int argc, char * argv[])
 
         for(i = 0; i < numArraySizes; i++)
         {
+            //create + populate array
             int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
-            highest = arraySizes[i]-1;
-            lowest = 0;
-            for(j = 0; j < arraySizes[i]; j++)
+            for(k = 0; k < arraySizes[i]; k++)
             {
                 temp = randNum();
-                // if(temp > highest) //highest and lowest represent array indexes not min and max values
-                // {
-                //     highest = temp;
-                // }
-                // else if(temp < lowest)
-                // {
-                //     lowest = temp;
-                // }
-                intArray[j] = temp;
+                intArray[k] = temp;
             }
+            //define greatest and least index
+            highest = arraySizes[i]-1;
+            lowest = 0;
+
             switch (sortAlg)
             {
-                case 1:
+                case 1://quickSort_int
+                  for(j=0;j<numTrials;j++){
+                    //create + populate array
+                    int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                    for(k = 0; k < arraySizes[i]; k++)
+                    {
+                        temp = randNum();
+                        intArray[k] = temp;
+                    }
+                    //define greatest and least index
+                    highest = arraySizes[i]-1;
+                    lowest = 0;
+
+                    //sort array and get sort time
                     start_t = clock();
                     quickSort_int(intArray, lowest, highest);
                     end_t = clock();
                     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterQuick->intTrials->trial1;
-                    break;
-                case 2:
-                    start_t = clock();
-                    mergeSort_int(intArray, lowest, highest);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterMerge->intTrials->trial1;
-                    break;
-                case 3:
-                    start_t = clock();
-                    radixSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterRadix->intTrials->trial1;
-                    break;
-                case 4:
-                    start_t = clock();
-                    heapSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterHeap->intTrials->trial1;
-                    break;
-                case 5:
-                    start_t = clock();
-                    insertionSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterInsertion->intTrials->trial1;
-                    break;
-                case 6:
-                    start_t = clock();
-                    selectionSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterSelection->intTrials->trial1;
-                    break;
-                case 7:
-                    start_t = clock();
-                    quickSort_int(intArray, lowest, highest);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterQuick->intTrials->trial1;
 
-                    start_t = clock();
-                    mergeSort_int(intArray, lowest, highest);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterMerge->intTrials->trial1;
+                    //store time in appropriate index
+                    testResults[0].timeTrials[i]=total_t;
+                    }
+                    break;
+                case 2://mergeSort_int
+                for(j=0;j<numTrials;j++){
+                  //create + populate array
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  for(k = 0; k < arraySizes[i]; k++)
+                  {
+                      temp = randNum();
+                      intArray[k] = temp;
+                  }
+                  //define greatest and least index
+                  highest = arraySizes[i]-1;
+                  lowest = 0;
 
-                    start_t = clock();
-                    radixSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterRadix->intTrials->trial1;
+                  //sort array and get sort time
+                  start_t = clock();
+                  mergeSort_int(intArray, lowest, highest);
+                  end_t = clock();
+                  total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 
-                    start_t = clock();
-                    heapSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterHeap->intTrials->trial1;
+                  //store time in appropriate index
+                  testResults[0].timeTrials[i]=total_t;
+                  }
+                  break;
+                case 3://radixSort_int
+                for(j=0;j<numTrials;j++){
+                  //create + populate array
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  for(k = 0; k < arraySizes[i]; k++)
+                  {
+                      temp = randNum();
+                      intArray[k] = temp;
+                  }
+                  //define greatest and least index
+                  highest = arraySizes[i]-1;
+                  lowest = 0;
 
-                    start_t = clock();
-                    insertionSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterInsertion->intTrials->trial1;
+                  //sort array and get sort time
+                  start_t = clock();
+                  radixSort_int(intArray, arraySizes[i]);
+                  end_t = clock();
+                  total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 
-                    start_t = clock();
-                    selectionSort_int(intArray, arraySizes[i]);
-                    end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-                    masterSelection->intTrials->trial1;
+                  //store time in appropriate index
+                  testResults[0].timeTrials[i]=total_t;
+                  }
+                  break;
+                case 4://heapSort_int
+                for(j=0;j<numTrials;j++){
+                  //create + populate array
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  for(k = 0; k < arraySizes[i]; k++)
+                  {
+                      temp = randNum();
+                      intArray[k] = temp;
+                  }
+                  //define greatest and least index
+                  highest = arraySizes[i]-1;
+                  lowest = 0;
+
+                  //sort array and get sort time
+                  start_t = clock();
+                  heapSort_int(intArray, arraySizes[i]);
+                  end_t = clock();
+                  total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+
+                  //store time in appropriate index
+                  testResults[0].timeTrials[i]=total_t;
+                  }
+                  break;
+                case 5://insertionSort_int
+                    for(j=0;j<numTrials;j++){
+                      //create + populate array
+                      int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                      for(k = 0; k < arraySizes[i]; k++)
+                      {
+                          temp = randNum();
+                          intArray[k] = temp;
+                      }
+                      //define greatest and least index
+                      highest = arraySizes[i]-1;
+                      lowest = 0;
+
+                      //sort array and get sort time
+                      start_t = clock();
+                      insertionSort_int(intArray, arraySizes[i]);
+                      end_t = clock();
+                      total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+
+                      //store time in appropriate index
+                      testResults[0].timeTrials[i]=total_t;
+                      }
+                      break;
+                case 6://selectionSort_int
+                for(j=0;j<numTrials;j++){
+                  //create + populate array
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  for(k = 0; k < arraySizes[i]; k++)
+                  {
+                      temp = randNum();
+                      intArray[k] = temp;
+                  }
+                  //define greatest and least index
+                  highest = arraySizes[i]-1;
+                  lowest = 0;
+
+                  //sort array and get sort time
+                  start_t = clock();
+                  selectionSort_int(intArray, arraySizes[i]);
+                  end_t = clock();
+                  total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+
+                  //store time in appropriate index
+                  testResults[0].timeTrials[i]=total_t;
+                  }
+                  break;
+                case 7://perform all sorts at once
+                //     start_t = clock();
+                // randNum    quickSort_int(intArray, lowest, highest);
+                //     end_t = clock();
+                //     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                //     masterQuick->intTrials->trial1;
+                //
+                //     start_t = clock();
+                //     mergeSort_int(intArray, lowest, highest);
+                //     end_t = clock();
+                //     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                //     masterMerge->intTrials->trial1;
+                //
+                //     start_t = clock();
+                //     radixSort_int(intArray, arraySizes[i]);
+                //     end_t = clock();
+                //     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                //     masterRadix->intTrials->trial1;
+                //
+                //     start_t = clock();
+                //     heapSort_int(intArray, arraySizes[i]);
+                //     end_t = clock();
+                //     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                //     masterHeap->intTrials->trial1;
+                //
+                //     start_t = clock();
+                //     insertionSort_int(intArray, arraySizes[i]);
+                //     end_t = clock();
+                //     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                //     masterInsertion->intTrials->trial1;
+                //
+                //     start_t = clock();
+                //     selectionSort_int(intArray, arraySizes[i]);
+                //     end_t = clock();
+                //     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                //     masterSelection->intTrials->trial1;
                     break;
             }
             free(intArray);
@@ -190,7 +287,6 @@ int main(int argc, char * argv[])
     free(arraySizes);
 
     /*
-      It is up to you to implement the rest of the project.
 
   [Benjamin]-EXTRA CREDIT (low priority?)
       processCMDArgs will reject array sizes larger than 75000.
@@ -261,6 +357,25 @@ int main(int argc, char * argv[])
       Email Josh if you crash the server.
     */
 
+//Print results as 2d array
+    for(i=0; i<numTrialNodes; i++){
+      for(j=0;j<numTrials;j++){
+        printf("%Le, ", testResults[i].timeTrials[j]);
+      }
+      printf("\n");
+    }
+
+//free masterNode and trialNodes
+    for(i=0;i<numTrialNodes;i++){
+      //free dynamic array, set ptr to NULL
+      free(testResults[i].timeTrials);
+      testResults[i].timeTrials = NULL;
+      // //free trialNode set to NULL
+      // free(testResults[i]);
+      // testResults[i]=NULL;
+    }
+    free(testResults);
+    testResults=NULL;
 
     return 0;
 }
