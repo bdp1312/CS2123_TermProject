@@ -175,6 +175,9 @@ int main(int argc, char * argv[])
             free(array);
         }
     }
+    else if(sortType==1){
+      
+    }
 
     free(arraySizes);
 
