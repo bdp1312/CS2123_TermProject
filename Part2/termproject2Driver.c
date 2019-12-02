@@ -32,7 +32,7 @@ int printType;
 int sortType;
 
 //Sorting Algorithm
-//1 == quickSort, 2 == mergeSort, 3 == radixSort, 
+//1 == quickSort, 2 == mergeSort, 3 == radixSort,
 //4 == heapSort, 5 == insertionSort, 6 == selectionSort
 //7 == test all algorithms
 int sortAlg;
@@ -46,13 +46,20 @@ int numArraySizes;
 //Array sizes
 int * arraySizes;
 
+<<<<<<< HEAD:TermProject2/termproject2Driver.c
 int main(int argc, char * argv[]) 
 {
     processCMDArgs(argc, argv);
+=======
+int main(int argc, char * argv[]) {
+
+	processCMDArgs(argc, argv);
+>>>>>>> master:Part2/termproject2Driver.c
 
 	//For debugging purposes.
 	//Remove all printJobStatus() calls before creating
 	//final output and before submitting.
+<<<<<<< HEAD:TermProject2/termproject2Driver.c
     printJobStatus();
     
     masterNode *masterQuick = malloc(sizeof(masterNode));
@@ -177,6 +184,87 @@ int main(int argc, char * argv[])
     free(arraySizes);
 
     return 0;
+=======
+	printJobStatus();
+
+
+	/*
+		It is up to you to implement the rest of the project.
+
+[Benjamin]-EXTRA CREDIT (low priority?)
+		processCMDArgs will reject array sizes larger than 75000.
+		If you want to do the extra credit, modify processCMDArgs
+		to accept the larger array sizes.
+
+		For sorting strings:
+			Create the array for strings like this:
+				char array[arraySizes[numExperiments-1]][MAX_LEN];
+
+
+			This will create an array that can hold the largest
+			number of inputs.  Using this larger array to process
+			smaller number of inputs will be ok.
+
+			**Declare the string array ONCE at the top of your
+			  function then reuse it.  DO NOT declare a string
+			  array for each array size.**
+
+			You do not need to free this type of variable.
+
+			radixSort on strings will not work with this type of variable.
+			radixSort on strings is for extra credit.
+
+		For sorting integers:
+			Create the array for ints like this:
+				int * array = (int *) malloc (arraySizes[i] * sizeof(int));
+
+			You can create the array, fill it, sort it, then free it
+			for each array size.  REMEMBER to free it!
+
+			Use randNum() to get each random number for the integer arrays.
+
+		Google 'c clock' to find out how to time your sorting functions.
+		*/
+		//Use this timeing scheme
+		// clock_t startTime = clock();
+		// clock_t endTime = clock();
+		// clock_t totalTime = startTime - endTime;
+		/*
+
+		If quick sort and other faster sorts report a time of 0.0, that is ok.
+		Report 0.0 if that is the result.  Longer arrays and other sorts should
+		produce a visible time.
+
+		Create a data structure to store the results of all your experiments,
+		then print out everything at once.
+
+		To run your program in the background:
+			$ nohup ./project # # # # # > output.txt &
+
+		When running in the background and you haven't logged out of the server,
+		to see your currently running programs type:
+			$ jobs
+
+		If you have logged out, type:
+			$ ps aux | grep 'abc123'
+
+		If you want to kill the ./project process:
+			$ kill 'process id number'
+
+		Server Info
+		DO NOT use the fox servers for this assignment
+
+		in the lab $ ssh abc123@hen01.cs.utsarr.net
+		outside    $ ssh abc123@10.100.240.211
+
+		Email Josh if you crash the server.
+	*/
+
+
+	free(arraySizes);
+
+	return 0;
+>>>>>>> master:Part2/termproject2Driver.c
 }
 
 
@@ -315,8 +403,3 @@ void processCMDArgs(int argc, char * argv[]) {
 		arraySizes[i-5] = temp;
 	}
 }
-
-
-
-
-
