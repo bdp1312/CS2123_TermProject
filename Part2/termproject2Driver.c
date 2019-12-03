@@ -118,10 +118,10 @@ int main(int argc, char * argv[])
                     start_t = clock();
                     quickSort_int(intArray, lowest, highest);
                     end_t = clock();
-                    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+                    total_t = (double)(end_t - start_t); // / CLOCKS_PER_SEC;
 
                     //store time in appropriate index
-                    testResults[0].timeTrials[i]=total_t;
+                    testResults[i].timeTrials[j]=total_t;
                     }
                     break;
                 case 2://mergeSort_int
@@ -219,7 +219,7 @@ int main(int argc, char * argv[])
                 case 6://selectionSort_int
                 for(j=0;j<numTrials;j++){
                   //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//renaming to intArray
                   for(k = 0; k < arraySizes[i]; k++)
                   {
                       temp = randNum();
