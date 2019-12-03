@@ -72,10 +72,6 @@ int main(int argc, char * argv[])
         testResults[i].size = 0;
     }
 
-    if(sortType == 0)
-    {
-
-<<<<<<< HEAD
       if(sortType == 0)
       {
 
@@ -242,31 +238,6 @@ int main(int argc, char * argv[])
                     }
                     break;
                   case 6://selectionSort_int
-=======
-        int highest = 0;
-        int lowest = 0;
-        int temp;
-        clock_t start_t, end_t, total_t;
-
-        for(i = 0; i < numArraySizes; i++)
-        {
-
-            //create + populate array
-            int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
-            for(k = 0; k < arraySizes[i]; k++)
-            {
-                temp = randNum();
-                intArray[k] = temp;
-            }
-            //define greatest and least index
-            highest = arraySizes[i]-1;
-            lowest = 0;
-
-            switch (sortAlg)
-            {
-                case 1://quickSort_int
-
->>>>>>> 12f3c2e294efb76e56e3a8bfb131d91cd69e37af
                   //record array sizes
                   testResults[i].size=arraySizes[i];
 
@@ -284,7 +255,6 @@ int main(int argc, char * argv[])
 
                     //sort array and get sort time
                     start_t = clock();
-<<<<<<< HEAD
                     selectionSort_int(intArray, arraySizes[i]);
                     end_t = clock();
                     total_t = (long double)(end_t - start_t);
@@ -363,6 +333,7 @@ int main(int argc, char * argv[])
               }
               free(intArray);
           }
+
 
     }
     else if(sortType==1){
@@ -682,226 +653,6 @@ int main(int argc, char * argv[])
           free(strArray);
 
 
-=======
-                    quickSort_int(intArray, lowest, highest);
-                    end_t = clock();
-                    total_t = (long double)(end_t - start_t);
-
-                    //store time in appropriate index
-                    testResults[i].timeTrials[j]=total_t;
-                    testResults[i].average += total_t;
-                    if(numTrials-j==1){ testResults[i].average = testResults[i].average / numTrials;}
-                    }
-                    break;
-                case 2://mergeSort_int
-                //record array sizes
-                testResults[i].size=arraySizes[i];
-
-                for(j=0;j<numTrials;j++){
-                  //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
-                  for(k = 0; k < arraySizes[i]; k++)
-                  {
-                      temp = randNum();
-                      intArray[k] = temp;
-                  }
-                  //define greatest and least index
-                  highest = arraySizes[i]-1;
-                  lowest = 0;
-
-                  //sort array and get sort time
-                  start_t = clock();
-                  mergeSort_int(intArray, lowest, highest);
-                  end_t = clock();
-                  total_t = (long double)(end_t - start_t);
-
-                  //store time in appropriate index
-                  testResults[i].timeTrials[j]=total_t;
-                  testResults[i].average += total_t;
-                  if(numTrials-j==1){ testResults[i].average = testResults[i].average / numTrials;}
-                  }
-                  break;
-                case 3://radixSort_int
-                //record array sizes
-                testResults[i].size=arraySizes[i];
-
-                for(j=0;j<numTrials;j++){
-                  //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
-                  for(k = 0; k < arraySizes[i]; k++)
-                  {
-                      temp = randNum();
-                      intArray[k] = temp;
-                  }
-                  //define greatest and least index
-                  highest = arraySizes[i]-1;
-                  lowest = 0;
-
-                  //sort array and get sort time
-                  start_t = clock();
-                  radixSort_int(intArray, arraySizes[i]);
-                  end_t = clock();
-                  total_t = (long double)(end_t - start_t);
-
-                  //store time in appropriate index
-                  testResults[i].timeTrials[j]=total_t;
-                  testResults[i].average += total_t;
-                  if(numTrials-j==1){ testResults[i].average = testResults[i].average / numTrials;}
-                  }
-                  break;
-                case 4://heapSort_int
-                //record array sizes
-                testResults[i].size=arraySizes[i];
-
-                for(j=0;j<numTrials;j++){
-                  //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
-                  for(k = 0; k < arraySizes[i]; k++)
-                  {
-                      temp = randNum();
-                      intArray[k] = temp;
-                  }
-                  //define greatest and least index
-                  highest = arraySizes[i]-1;
-                  lowest = 0;
-
-                  //sort array and get sort time
-                  start_t = clock();
-                  heapSort_int(intArray, arraySizes[i]);
-                  end_t = clock();
-                  total_t = (long double)(end_t - start_t);
-
-                  //store time in appropriate index
-                  testResults[i].timeTrials[j]=total_t;
-                  testResults[i].average += total_t;
-                  if(numTrials-j==1){ testResults[i].average = testResults[i].average / numTrials;}
-                  }
-                  break;
-                case 5://insertionSort_int
-                //record array sizes
-                testResults[i].size=arraySizes[i];
-
-                for(j=0;j<numTrials;j++){
-                  //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
-                  for(k = 0; k < arraySizes[i]; k++)
-                  {
-                      temp = randNum();
-                      intArray[k] = temp;
-                  }
-                  //define greatest and least index
-                  highest = arraySizes[i]-1;
-                  lowest = 0;
-
-                  //sort array and get sort time
-                  start_t = clock();
-                  insertionSort_int(intArray, arraySizes[i]);
-                  end_t = clock();
-                  total_t = (long double)(end_t - start_t);
-
-                  //store time in appropriate index
-                  testResults[i].timeTrials[j]=total_t;
-                  testResults[i].average += total_t;
-                  if(numTrials-j==1){ testResults[i].average = testResults[i].average / numTrials;}
-                  }
-                  break;
-                case 6://selectionSort_int
-                //record array sizes
-                testResults[i].size=arraySizes[i];
-
-                for(j=0;j<numTrials;j++){
-                  //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
-                  for(k = 0; k < arraySizes[i]; k++)
-                  {
-                      temp = randNum();
-                      intArray[k] = temp;
-                  }
-                  //define greatest and least index
-                  highest = arraySizes[i]-1;
-                  lowest = 0;
-
-                  //sort array and get sort time
-                  start_t = clock();
-                  selectionSort_int(intArray, arraySizes[i]);
-                  end_t = clock();
-                  total_t = (long double)(end_t - start_t);
-
-                  //store time in appropriate index
-                  testResults[i].timeTrials[j]=total_t;
-                  testResults[i].average += total_t;
-                  if(numTrials-j==1){ testResults[i].average = testResults[i].average / numTrials;}
-                  }
-                  break;
-                case 7://perform all sorts at once
-
-                  //record array sizes
-                  testResults[i].size=arraySizes[i];
-
-                  for(l=0; l<6; l++){
-
-                  for(j=0;j<numTrials;j++){
-                    //create + populate array
-                    int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//renaming to intArray
-                    for(k = 0; k < arraySizes[i]; k++)
-                    {
-                        temp = randNum();
-                        intArray[k] = temp;
-                    }
-                    //define greatest and least index
-                    highest = arraySizes[i]-1;
-                    lowest = 0;
-
-                    //sort array and get sort time
-                    if (l==0){
-                        start_t = clock();
-                        quickSort_int(intArray, lowest, highest);
-                        end_t = clock();
-                      }
-
-                      if (l==1){
-                        start_t = clock();
-                        mergeSort_int(intArray, lowest, highest);
-                        end_t = clock();
-                      }
-
-                      if (l==2){
-                        start_t = clock();
-                        radixSort_int(intArray, arraySizes[i]);
-                        end_t = clock();
-                      }
-
-                      if (l==3){
-                        start_t = clock();
-                        heapSort_int(intArray, arraySizes[i]);
-                        end_t = clock();
-                      }
-
-                      if (l==4){
-                        start_t = clock();
-                        insertionSort_int(intArray, arraySizes[i]);
-                        end_t = clock();
-                      }
-
-                      if (l==5){
-                        start_t = clock();
-                        selectionSort_int(intArray, arraySizes[i]);
-                        end_t = clock();
-                      }
-                    }
-                    total_t = (long double)(end_t - start_t);
-
-                    //store time in appropriate index
-                    testResults[i+numArraySizes*l].timeTrials[j]=total_t;
-                    testResults[i+numArraySizes*l].average += total_t;
-                    if(numTrials-j==1){ testResults[i+numArraySizes*l].average = testResults[i+numArraySizes*l].average / numTrials;}
-                  }
-
-                    break;
-            }
-            free(intArray);
-        }
->>>>>>> 12f3c2e294efb76e56e3a8bfb131d91cd69e37af
     }
     else if(sortType==1){
 
@@ -910,13 +661,8 @@ int main(int argc, char * argv[])
     free(arraySizes);
 
     /*
-<<<<<<< HEAD
-<<<<<<< HEAD
-  [Benjamin]-EXTRA CREDIT (low priority?)
-=======
 
   -EXTRA CREDIT (low priority?)
->>>>>>> 12f3c2e294efb76e56e3a8bfb131d91cd69e37af
 =======
 
   -EXTRA CREDIT (low priority?)
