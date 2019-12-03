@@ -71,11 +71,11 @@ int main(int argc, char * argv[])
       numTrialNodes=numArraySizes*6;
     }
 
-    masterNode testResults=malloc(sizeof(trialNode)*numTrialNodes);
+    masterNode testResults = (masterNode) malloc(sizeof(trialNode)*numTrialNodes);
 
     //each trail node should contain array of double the size of the number of trials
     for(i=0;i<numTrialNodes;i++){
-        testResults[i].timeTrials= malloc(sizeof(double)*numTrials);
+        testResults[i].timeTrials = (long double *) malloc(sizeof(long double)*numTrials);
     }
 
     if(sortType == 0)
