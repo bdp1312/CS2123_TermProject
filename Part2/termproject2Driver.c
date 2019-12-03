@@ -337,7 +337,6 @@ int main(int argc, char * argv[])
 
     }
     else if(sortType==1){
-      else if(sortType==1){
           int j = 0;
           int highest = 0;
           int lowest = 0;
