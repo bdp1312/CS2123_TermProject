@@ -43,7 +43,7 @@ int * arraySizes;
 int main(int argc, char * argv[])
 {
 
-  int i, j, k; //counter Variables
+  int i, j, k, l; //counter Variables
 
     processCMDArgs(argc, argv);
 
@@ -74,7 +74,7 @@ int main(int argc, char * argv[])
 
     if(sortType == 0)
     {
-        int j;
+
         int highest = 0;
         int lowest = 0;
         int temp;
@@ -84,7 +84,7 @@ int main(int argc, char * argv[])
         {
 
             //create + populate array
-            int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+            int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
             for(k = 0; k < arraySizes[i]; k++)
             {
                 temp = randNum();
@@ -103,7 +103,7 @@ int main(int argc, char * argv[])
 
                   for(j=0;j<numTrials;j++){
                     //create + populate array
-                    int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                    int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
                     for(k = 0; k < arraySizes[i]; k++)
                     {
                         temp = randNum();
@@ -131,7 +131,7 @@ int main(int argc, char * argv[])
 
                 for(j=0;j<numTrials;j++){
                   //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
                   for(k = 0; k < arraySizes[i]; k++)
                   {
                       temp = randNum();
@@ -159,7 +159,7 @@ int main(int argc, char * argv[])
 
                 for(j=0;j<numTrials;j++){
                   //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
                   for(k = 0; k < arraySizes[i]; k++)
                   {
                       temp = randNum();
@@ -187,7 +187,7 @@ int main(int argc, char * argv[])
 
                 for(j=0;j<numTrials;j++){
                   //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
                   for(k = 0; k < arraySizes[i]; k++)
                   {
                       temp = randNum();
@@ -215,7 +215,7 @@ int main(int argc, char * argv[])
 
                 for(j=0;j<numTrials;j++){
                   //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
                   for(k = 0; k < arraySizes[i]; k++)
                   {
                       temp = randNum();
@@ -243,7 +243,7 @@ int main(int argc, char * argv[])
 
                 for(j=0;j<numTrials;j++){
                   //create + populate array
-                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//[Benjamin] renaming to intArray
+                  int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));// renaming to intArray
                   for(k = 0; k < arraySizes[i]; k++)
                   {
                       temp = randNum();
@@ -266,6 +266,72 @@ int main(int argc, char * argv[])
                   }
                   break;
                 case 7://perform all sorts at once
+
+                  //record array sizes
+                  testResults[i].size=arraySizes[i];
+
+                  for(j=0; j<6; j++){
+
+                  for(j=0;j<numTrials;j++){
+                    //create + populate array
+                    int * intArray = (int *) malloc (arraySizes[i] * sizeof(int));//renaming to intArray
+                    for(k = 0; k < arraySizes[i]; k++)
+                    {
+                        temp = randNum();
+                        intArray[k] = temp;
+                    }
+                    //define greatest and least index
+                    highest = arraySizes[i]-1;
+                    lowest = 0;
+
+                    //sort array and get sort time
+                    if (l==0){
+                        start_t = clock();
+                        quickSort_int(intArray, lowest, highest);
+                        end_t = clock();
+                      }
+
+                      if (l==1){
+                        start_t = clock();
+                        mergeSort_int(intArray, lowest, highest);
+                        end_t = clock();
+                      }
+
+                      if (l==2){
+                        start_t = clock();
+                        radixSort_int(intArray, arraySizes[i]);
+                        end_t = clock();
+                      }
+
+                      if (l==3){
+                        start_t = clock();
+                        heapSort_int(intArray, arraySizes[i]);
+                        end_t = clock();
+                      }
+
+                      if (l==4){
+                        start_t = clock();
+                        insertionSort_int(intArray, arraySizes[i]);
+                        end_t = clock();
+                      }
+
+                      if (l==5){
+                        start_t = clock();
+                        selectionSort_int(intArray, arraySizes[i]);
+                        end_t = clock();
+                      }
+                    }
+                    total_t = (long double)(end_t - start_t);
+
+                    //store time in appropriate index
+                    testResults[i+numArraySizes*l].timeTrials[j]=total_t;
+                    testResults[i+numArraySizes*l].average += total_t;
+                    if(numTrials-j==1){ testResults[i+numArraySizes*l].average = testResults[i+numArraySizes*l].average / numTrials;}
+                  }
+
+                    break;
+
+
                 //     start_t = clock();
                 // randNum    quickSort_int(intArray, lowest, highest);
                 //     end_t = clock();
@@ -314,7 +380,7 @@ int main(int argc, char * argv[])
 
     /*
 
-  [Benjamin]-EXTRA CREDIT (low priority?)
+  -EXTRA CREDIT (low priority?)
       processCMDArgs will reject array sizes larger than 75000.
       If you want to do the extra credit, modify processCMDArgs
       to accept the larger array sizes.
