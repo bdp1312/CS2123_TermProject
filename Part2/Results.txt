@@ -1,0 +1,13 @@
+Benjamin Parrish(cbe982)
+
+I worked with Luke DuBonis (hjt755)
+
+The project is not compleate. We implemented interger storts and the individual string storts. The individual ints sorts were the only ones that work without errors. 
+
+The best algorithm for intergers is by far quicksort.
+
+Could not conclusivly say the best algorithm for strings.
+
+We did some of the bonus test for the intergers. Though we did not make it for sorting algorithms.
+
+We did not atempt the bonus for strings.

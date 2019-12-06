@@ -1,0 +1,27 @@
+INTS
+
+Make dynamic array[int], randomly picked 
+
+Create menu for diferant searching algorithms
+
+perform selected searching algorthm three times on three random arrays
+	write to same array three times, compute avg.
+	free array after all searches are performed
+	
+analize times and the algoritms by big O notation
+recomend a searching algorithm
+
+STRINGS
+
+use file from pt 2
+
+add option for string in menu
+
+search for provided name
+
+repeat at five times compute avg
+	five searches on the same sorted array for same word
+
+analize times and the algorithm's big o notation
+
+recomend which searching algorithm
