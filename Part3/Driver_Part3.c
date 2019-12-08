@@ -1,11 +1,11 @@
+  
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
 #include <ctype.h>
 
-#include "Searches.h"
-#include "QuickSort.h"
+//#include "Searches.h"
 
 //helper functions to run sorts and get times
 int minArraySize = 1000;
@@ -22,7 +22,7 @@ void processCommands(int argc, char *argv[])
   for(i=1;i<argc;++i){
       temp=atoi(argv[i]);
       if(temp<minArraySize || temp > maxArraySize){
-        printf("ERROR! Vallid array size is between %d and %d.\n Run as '/.Project.exe size1, size2, ... sizeN'.\n", minArraySize, maxArraySize);
+        printf("ERROR! Valid array size is between %d and %d.\n", minArraySize, maxArraySize);
         free(arraySizes);
         exit(EXIT_SUCCESS);
       }
@@ -36,28 +36,26 @@ int main(int argc, char *argv[])
   char dataType;
   char searchType;
   int arraySize;
-  processCommands(argc, argv);
+  //processCommands(argc, argv);
   // Create menu for diferant searching algorithms
-  while(exit = 1)//main menue loop
+  while(exit == 1)//main menue loop
   {
-      // printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
-      // scanf("%d\n", &arraySize);
-      // if(!(minArraySize <= arraySize || arraySize <= maxArraySize))
-      // {
-      //     printf("Invalid array size\n");
-      //     break;
-      // }
-/*    ^
-      |
-      |
-      Array sizes will be given in arguments of main*/
+      printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
+      scanf("%d", &arraySize);
+      if(minArraySize >= arraySize || arraySize >= maxArraySize)
+      {
+          printf("Invalid array size\n");
+          break;
+      }
 
       printf("Enter desired data type: 'I' for int or 'C' char\n");
-      scanf("%c\n", &dataType);
+      scanf("%*c");
+      scanf("%c", &dataType);
 
       if(toupper(dataType) == 'I')
       {
-          printf("Enter search type: 'L' for linear or 'B' for binary");
+          printf("Enter search type: 'L' for linear or 'B' for binary\n");
+          scanf("%*c");
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
@@ -76,6 +74,7 @@ int main(int argc, char *argv[])
       else if(toupper(dataType) == 'C')
       {
           printf("Enter search type: 'L' for linear or 'B' for binary");
+          scanf("%*c");
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
@@ -98,8 +97,8 @@ int main(int argc, char *argv[])
       }
 
       printf("Would you like to exit(0) or continue(1)\n");
-      scanf("%d\n", &exit);
-      if(exit != 1 || exit != 0)
+      scanf("%d", &exit);
+      if(exit != 1 && exit != 0)
       {
           printf("Invalid input... exiting anyway\n");
           break;
