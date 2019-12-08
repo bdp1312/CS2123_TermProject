@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<math.h>
 
 #include"Searches.h"
 //#include "projectHeader.h"
@@ -30,71 +31,50 @@ int readFileLine(FILE *fp, char *buffer, int bufferSize)
 
 int main(){
   //interator variable
-  int i, j, wordSize;
-
-  char *target;
+  int i, target, k, temp;
 
   //alocate space for wordArray
-  char **wordArray=(char **)malloc(sizeof(char*)*10);
-  //create, open file pointer
-  FILE *fp = fopen("last_name.txt", "r");
-  //create a buffer to read words from file to
-  char charBuffer[100];
-
-  //for each slot in wordArray
-  for(i=0;i<10;++i){
-    //read word from file to bufferClear
-    //get word size
-    wordSize = readFileLine(fp, charBuffer, 100);
-
-    //point temp to block of memory equal to size of words
-    wordArray[i] = (char *)malloc(sizeof(char)*wordSize);
-
-    //copy values from charBuffer to wordArray;
-    for(j=0;j<wordSize;++j){
-      wordArray[i][j] = charBuffer[j];
-    }
+  int * intArray = (int *) malloc (10 * sizeof(int));
+  for(k = 0; k < 10; k++)
+  {
+      temp = rand();
+      intArray[k] = temp;
   }
 
 //print contents of string arrays
   for(i=0;i<10;++i){
-    printf("%s\n", wordArray[i]);
+    printf("%d\n", intArray[i]);
   }
 
 //get desired name from terminal
-  printf("Enter name to search.\n");
-  scanf("%s", target);
+  printf("Enter number to search.\n");
+  scanf("%d", &target);
 
-  printf("Name selected: %s\n", target);
+  printf("Number selected: %d\n", target);
 
 //sort wordArray
-  // quickSort_str(wordArray, 0, 9);
-  quickStrSort(wordArray, 0, 9);
+  // quickSort_int(wordArray, 0, 9);
+  quickIntSort(intArray, 0, 9);
 
 
 //search for target
-int found = biStringArraySearch(wordArray, 10, target);
+int found = biIntArraySearch(intArray, 10, target);
 // int found = linStringArraySearch(wordArray, 10, target);
 
 if(found!=-1){
-  printf("Found %s, at index %d\n", wordArray[found], found);
+  printf("Found %d, at index %d\n", intArray[found], found);
 } else {
-  printf("%s not found.\n", target);
+  printf("%d not found.\n", target);
 }
 
 //print sorted array
 for(i=0;i<10;++i){
-  printf("%s\n", wordArray[i]);
+  printf("%d\n", intArray[i]);
 }
 
 
-//free wordArray Memeory
-  for(i=0;i<10;++i){
-    free(wordArray[i]); //Free each word in wordArray
-    wordArray[i]=NULL;
-  }
-  free(wordArray); //free wordArray pointer itself
-  wordArray=NULL;
+  free(intArray); //free wordArray pointer itself
+  intArray=NULL;
 
   return 0;
 }
