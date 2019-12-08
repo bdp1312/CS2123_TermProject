@@ -1,16 +1,13 @@
-  
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
 #include <ctype.h>
 
-<<<<<<< HEAD
+
 #include "Searches.h"
 #include "QuickSort.h"
-=======
-//#include "Searches.h"
->>>>>>> d4535b02d4137afea0576881f619a442e3c24be5
 
 //helper functions to run sorts and get times
 int minArraySize = 1000;
@@ -27,11 +24,7 @@ void processCommands(int argc, char *argv[])
   for(i=1;i<argc;++i){
       temp=atoi(argv[i]);
       if(temp<minArraySize || temp > maxArraySize){
-<<<<<<< HEAD
         printf("ERROR! Vallid array size is between %d and %d.\n Run as '/.Project.exe size1, size2, ... sizeN'.\n", minArraySize, maxArraySize);
-=======
-        printf("ERROR! Valid array size is between %d and %d.\n", minArraySize, maxArraySize);
->>>>>>> d4535b02d4137afea0576881f619a442e3c24be5
         free(arraySizes);
         exit(EXIT_SUCCESS);
       }
@@ -62,23 +55,11 @@ int main(int argc, char *argv[])
       |
       Array sizes will be given in arguments of main*/
 
-      printf("Enter desired data type: 'I' for int or 'C' char\n");
-      scanf("%c\n", &dataType);
 
-=======
-      printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
-      scanf("%d", &arraySize);
-      if(minArraySize >= arraySize || arraySize >= maxArraySize)
-      {
-          printf("Invalid array size\n");
-          break;
-      }
-      
       printf("Enter desired data type: 'I' for int or 'C' char\n");
       scanf("%*c");
       scanf("%c", &dataType);
-      
->>>>>>> d4535b02d4137afea0576881f619a442e3c24be5
+
       if(toupper(dataType) == 'I')
       {
           printf("Enter search type: 'L' for linear or 'B' for binary\n");
@@ -165,4 +146,3 @@ int main(int argc, char *argv[])
 
   return 0;
 }
-
