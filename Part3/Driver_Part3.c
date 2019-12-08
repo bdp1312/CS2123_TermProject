@@ -90,6 +90,14 @@ int main(int argc, char *argv[])
           printf("Invalid data type\n");
           break;
       }
+      
+      printf("Would you like to exit(0) or continue(1)\n");
+      scanf("%d\n", &exit);
+      if(exit != 1 || exit != 0)
+      {
+          printf("Invalid input... exiting anyway\n");
+          break;
+      }
   }
 
 
