@@ -1,8 +1,9 @@
-  
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 #include<time.h>
+#include <ctype.h>
 
 //#include "Searches.h"
 
@@ -41,16 +42,16 @@ int main(int argc, char *argv[])
   {
       printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
       scanf("%d", &arraySize);
-      if(minArraySize >= arraySize || arraySize >= maxArraySize)
+      if(minArraySize > arraySize || arraySize > maxArraySize)
       {
           printf("Invalid array size\n");
           break;
       }
-      
+
       printf("Enter desired data type: 'I' for int or 'C' char\n");
       scanf("%*c");
       scanf("%c", &dataType);
-      
+
       if(toupper(dataType) == 'I')
       {
           printf("Enter search type: 'L' for linear or 'B' for binary\n");
@@ -58,11 +59,11 @@ int main(int argc, char *argv[])
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
-              
+            printf("Running Linear Int Search\n");
           }
           else if(toupper(searchType) == 'B')
           {
-              
+            printf("Running Bianary Int Search\n");
           }
           else
           {
@@ -72,16 +73,16 @@ int main(int argc, char *argv[])
       }
       else if(toupper(dataType) == 'C')
       {
-          printf("Enter search type: 'L' for linear or 'B' for binary");
+          printf("Enter search type: 'L' for linear or 'B' for binary\n");
           scanf("%*c");
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
-              
+            printf("Running Linear String Search\n");
           }
           else if(toupper(searchType) == 'B')
           {
-              
+            printf("Running Bianary string Search\n");
           }
           else
           {
@@ -94,7 +95,7 @@ int main(int argc, char *argv[])
           printf("Invalid data type\n");
           break;
       }
-      
+
       printf("Would you like to exit(0) or continue(1)\n");
       scanf("%d", &exit);
       if(exit != 1 && exit != 0)
@@ -137,4 +138,3 @@ int main(int argc, char *argv[])
 
   return 0;
 }
-
