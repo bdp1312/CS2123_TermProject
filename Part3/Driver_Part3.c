@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
   // Create menu for diferant searching algorithms
   while(exit == 1)//main menue loop
   {
-<<<<<<< HEAD
+
       // printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
       // scanf("%d\n", &arraySize);
       // if(!(minArraySize <= arraySize || arraySize <= maxArraySize))
