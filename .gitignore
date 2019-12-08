@@ -6,6 +6,6 @@
   *.o
   *.zip
   *.swp
-  a.out
+  */a.out
 
 #ignored directories
