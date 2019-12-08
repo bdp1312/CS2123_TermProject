@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -38,9 +37,9 @@ int main(int argc, char *argv[])
   char dataType;
   char searchType;
   int arraySize;
-  //processCommands(argc, argv);
+  processCommands(argc, argv);
   // Create menu for diferant searching algorithms
-  while(exit == 1)//main menue loop
+  while(exit = 1)//main menue loop
   {
 
       printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
@@ -57,8 +56,7 @@ int main(int argc, char *argv[])
 
       if(toupper(dataType) == 'I')
       {
-          printf("Enter search type: 'L' for linear or 'B' for binary\n");
-          scanf("%*c");
+          printf("Enter search type: 'L' for linear or 'B' for binary");
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
@@ -77,7 +75,6 @@ int main(int argc, char *argv[])
       else if(toupper(dataType) == 'C')
       {
           printf("Enter search type: 'L' for linear or 'B' for binary");
-          scanf("%*c");
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
@@ -100,8 +97,8 @@ int main(int argc, char *argv[])
       }
 
       printf("Would you like to exit(0) or continue(1)\n");
-      scanf("%d", &exit);
-      if(exit != 1 && exit != 0)
+      scanf("%d\n", &exit);
+      if(exit != 1 || exit != 0)
       {
           printf("Invalid input... exiting anyway\n");
           break;
