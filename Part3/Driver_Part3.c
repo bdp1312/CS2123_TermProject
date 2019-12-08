@@ -31,12 +31,73 @@ void processCommands(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
   int exit = 1; //exit variable set to 1(=false)
+  char dataType;
+  char searchType;
+  int arraySize;
   processCommands(argc, argv);
-
   // Create menu for diferant searching algorithms
-  while(exit = 1;)//main menue loop
+  while(exit = 1)//main menue loop
   {
-
+      printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
+      scanf("%d\n", &arraySize);
+      if(!(minArraySize <= arraySize || arraySize <= maxArraySize))
+      {
+          printf("Invalid array size\n");
+          break;
+      }
+      
+      printf("Enter desired data type: 'I' for int or 'C' char\n");
+      scanf("%c\n", &dataType);
+      
+      if(toupper(dataType) == 'I')
+      {
+          printf("Enter search type: 'L' for linear or 'B' for binary");
+          scanf("%c", &searchType);
+          if(toupper(searchType) == 'L')
+          {
+              
+          }
+          else if(toupper(searchType) == 'B')
+          {
+              
+          }
+          else
+          {
+              printf("Invalid search type\n");
+              break;
+          }
+      }
+      else if(toupper(dataType) == 'C')
+      {
+          printf("Enter search type: 'L' for linear or 'B' for binary");
+          scanf("%c", &searchType);
+          if(toupper(searchType) == 'L')
+          {
+              
+          }
+          else if(toupper(searchType) == 'B')
+          {
+              
+          }
+          else
+          {
+              printf("Invalid search type\n");
+              break;
+          }
+      }
+      else
+      {
+          printf("Invalid data type\n");
+          break;
+      }
+      
+      printf("Would you like to exit(0) or continue(1)\n");
+      scanf("%d\n", &exit);
+      if(exit != 1 || exit != 0)
+      {
+          printf("Invalid input... exiting anyway\n");
+          break;
+      }
   }
 
 
