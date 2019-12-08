@@ -268,9 +268,9 @@ int main(int argc, char * argv[])
                 case 7://perform all sorts at once
 
                   //record array sizes
-                  testResults[i].size=arraySizes[i];
 
                   for(l=0; l<6; l++){
+                    testResults[i+numArraySizes*l].size=arraySizes[i];
 
                   for(j=0;j<numTrials;j++){
                     //create + populate array
@@ -320,7 +320,7 @@ int main(int argc, char * argv[])
                         selectionSort_int(intArray, arraySizes[i]);
                         end_t = clock();
                       }
-                    }
+
                     total_t = (long double)(end_t - start_t);
 
                     //store time in appropriate index
@@ -328,7 +328,7 @@ int main(int argc, char * argv[])
                     testResults[i+numArraySizes*l].average += total_t;
                     if(numTrials-j==1){ testResults[i+numArraySizes*l].average = testResults[i+numArraySizes*l].average / numTrials;}
                   }
-
+                }
                     break;
             }
             free(intArray);
@@ -672,28 +672,40 @@ int main(int argc, char * argv[])
     */
 
 //Print results as 2d array
-    switch(sortAlg)
-    {
-      case 1:
-        printf("quickSort\n");
-        break;
-      case 2:
-        printf("mergeSort\n");
-        break;
-      case 3:
-        printf("radixSort\n");
-        break;
-      case 4:
-        printf("heapSort\n");
-        break;
-      case 5:
-        printf("insertionSort\n");
-        break;
-      case 6:
-        printf("selectionSort\n");
-        break;
-    }
     for(i=0; i<numTrialNodes; i++){
+      if(i % numArraySizes == 0){
+        if(sortAlg!=7){
+          switch(sortAlg)
+          {
+            case 1:
+              printf("quickSort\n");
+              break;
+            case 2:
+              printf("mergeSort\n");
+              break;
+            case 3:
+              printf("radixSort\n");
+              break;
+            case 4:
+              printf("heapSort\n");
+              break;
+            case 5:
+              printf("insertionSort\n");
+              break;
+            case 6:
+              printf("selectionSort\n");
+              break;
+          }
+        } else {
+          if(i/numArraySizes == 0){printf("quickSort\n");}
+          else if(i/numArraySizes == 1){printf("mergeSort\n");}
+          else if(i/numArraySizes == 2){printf("radixSort\n");}
+          else if(i/numArraySizes == 3){printf("heapSort\n");}
+          else if(i/numArraySizes == 4){printf("insertionSort\n");}
+          else if(i/numArraySizes == 5){printf("selectionSort\n");}
+      }
+
+      }
       printf("size: %d,    average: %Le, ", testResults[i].size, testResults[i].average / CLOCKS_PER_SEC);
       for(j=0;j<numTrials;j++){
         printf("%Le, ", testResults[i].timeTrials[j] / CLOCKS_PER_SEC);
