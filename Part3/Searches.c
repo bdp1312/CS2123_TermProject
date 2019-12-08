@@ -52,9 +52,9 @@ int biStringArraySearch(char **myArray, int sizeOfArray, char *soughtElement){
       if(strcmp(myArray[mid], soughtElement) == 0){
         return mid;
       } else if(strcmp(myArray[mid], soughtElement)<0){
-        end = mid-1;
-      } else{
         start = mid+1;
+      } else{
+        end = mid-1;
       }
     }
     return -1;
