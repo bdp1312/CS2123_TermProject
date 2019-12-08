@@ -2,6 +2,7 @@
 #include<stdio.h>
 
 #include"Searches.h"
+#include "projectHeader.h"
 
 
 // program will create read first 10 names file to stringList
@@ -66,8 +67,13 @@ int main(){
 
   printf("Name selected: %s\n", target);
 
+//sort wordArray
+  // quickSort_str(wordArray, 0, 9);
+
+
 //search for target
-int found = biStringArraySearch(wordArray, 10, target);
+//int found = biStringArraySearch(wordArray, 10, target);
+int found = linStringArraySearch(wordArray, 10, target);
 
 if(found!=-1){
   printf("Found %s, at index %d\n", wordArray[found], found);
