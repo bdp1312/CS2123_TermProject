@@ -4,7 +4,7 @@
   #name executables <fileName>.exe to keep git from tracking them
   *.exe
   *.o
-
+  *.zip
   a.out
 
 #ignored directories
