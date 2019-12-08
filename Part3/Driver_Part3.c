@@ -43,18 +43,13 @@ int main(int argc, char *argv[])
   while(exit == 1)//main menue loop
   {
 
-      // printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
-      // scanf("%d\n", &arraySize);
-      // if(!(minArraySize <= arraySize || arraySize <= maxArraySize))
-      // {
-      //     printf("Invalid array size\n");
-      //     break;
-      // }
-/*    ^
-      |
-      |
-      Array sizes will be given in arguments of main*/
-
+      printf("Enter array size between %d and %d\n", minArraySize, maxArraySize);
+      scanf("%d\n", &arraySize);
+      if(!(minArraySize <= arraySize || arraySize <= maxArraySize))
+      {
+          printf("Invalid array size\n");
+          break;
+      }
 
       printf("Enter desired data type: 'I' for int or 'C' char\n");
       scanf("%*c");
