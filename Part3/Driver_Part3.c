@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -66,13 +65,16 @@ int main(int argc, char *argv[])
 {
   clock_t start_t, end_t;
   long double run_t, total_t;
-  int i, j, wordSize, targetLocation, intTarget;
+  int i, j, wordSize, targetLocation, intTarget, temp;
   int exit = 1; //exit variable set to 1(=false)
   char dataType, searchType;
   char *charTarget;
   int arraySize;
   //allocate wordArray pointer, set to NULL
   char **wordArray=NULL;
+<<<<<<< HEAD
+  //allocate intArray pointer, set to NULL
+  int *intArray = NULL;
   //create a buffer to read words from file to
   char charBuffer[100];
   //create name file pointer nfp
@@ -100,16 +102,57 @@ int main(int argc, char *argv[])
 
       if(toupper(dataType) == 'I')
       {
+          if(intArray == NULL)
+          {
+              intArray = (int *) malloc (arraySize * sizeof(int));
+              for(j = 0; j < arraySize; j++)
+              {
+                  temp = rand();
+                  intArray[j] = temp;
+              }
+          }
+
+          printf("Enter number to search for: \n");
+          scanf("%*c");
+          scanf("%d", &intTarget);
+
+          printf("number entered: %d\n", intTarget);
+
           printf("Enter search type: 'L' for linear or 'B' for binary\n");
           scanf("%*c");
           scanf("%c", &searchType);
+
           if(toupper(searchType) == 'L')
           {
             printf("Running Linear Int Search\n");
+
+            int targetLocation = linIntArraySearch(intArray, arraySize, intTarget);
+
+            if(targetLocation != -1)
+            {
+                printf("%d found at %d\n", intTarget, targetLocation);
+            }
+            else
+            {
+                printf("%d not found\n", intTarget);
+            }
           }
           else if(toupper(searchType) == 'B')
           {
             printf("Running Bianary Int Search\n");
+
+            quickIntSort(intArray, 0, arraySize);
+
+            int targetLocation = linIntArraySearch(intArray, arraySize, intTarget);
+
+            if(targetLocation != -1)
+            {
+                printf("%d found at %d\n", intTarget, targetLocation);
+            }
+            else
+            {
+                printf("%d not found\n", intTarget);
+            }
           }
           else
           {
@@ -139,7 +182,7 @@ int main(int argc, char *argv[])
             //point temp to block of memory equal to size of words
             wordArray[i] = (char *)malloc(sizeof(char)*maxArraySize);
 
-            //copy values from cha,rBuffer to wordArray;
+            //copy values from charBuffer to wordArray;
             for(j=0;j<wordSize;++j){
               wordArray[i][j] = charBuffer[j];
             }
@@ -156,8 +199,6 @@ int main(int argc, char *argv[])
         //prompt user for search charTarget
         //get desired name from terminal
           printf("Enter name to search.\n");
-          scanf("%*c");
-          scanf("%*c");
           scanf("%*c");
           scanf("%s", charTarget);
 
@@ -259,6 +300,17 @@ int main(int argc, char *argv[])
   // recomend which searching algorithm
 
 //close output file
+
+//free wordArray Memeory if it has been opened
+  if(wordArray!=NULL){
+    for(i=0;i<arraySize;++i){
+      free(wordArray[i]); //Free each word in wordArray
+      wordArray[i]=NULL;
+    }
+    free(wordArray); //free wordArray pointer itself
+    wordArray=NULL;
+  }
+
 
 //free wordArray Memeory if it has been opened
   if(wordArray!=NULL){
