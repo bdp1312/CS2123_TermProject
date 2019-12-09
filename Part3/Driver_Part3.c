@@ -19,18 +19,18 @@ int *arraySizes;
 int numArraySizes;
 int dataMode;// set to 0 for int,
 
-//reads from filePointer fp until reaches '\n' or '\0' character, or size of buffer is reached.
+//reads from filePointer nfp until reaches '\n' or '\0' character, or size of buffer is reached.
 //returns size of word stored in buffer
 //if a line in a file is longer than bufferSize-1 line will be returned as multiple words
-int readFileLine(FILE *fp, char *buffer, int bufferSize)
+int readFileLine(FILE *nfp, char *buffer, int bufferSize)
 {
 
   int i, j, wordSize;
   char *charTarget; //
   char temp;
   for(i=0;i<bufferSize-1;++i){
-    temp = fgetc(fp);
-    while(temp == '\r'){temp=fgetc(fp);}
+    temp = fgetc(nfp);
+    while(temp == '\r'){temp=fgetc(nfp);}
     if(temp=='\0' || temp=='\n'){
       break;
     }
@@ -64,6 +64,8 @@ void processCommands(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
+  clock_t start_t, end_t;
+  long double run_t, total_t;
   int i, j, wordSize, targetLocation, intTarget;
   int exit = 1; //exit variable set to 1(=false)
   char dataType, searchType;
@@ -73,8 +75,12 @@ int main(int argc, char *argv[])
   char **wordArray=NULL;
   //create a buffer to read words from file to
   char charBuffer[100];
-  //create file pointer fp
-  FILE *fp;
+  //create name file pointer nfp
+  FILE * nfp;
+  FILE * ofp; //create output file pointer
+
+  //open Output file
+  ofp = fopen("output.txt", "w");
 
   //processCommands(argc, argv);
   // Create menu for diferant searching algorithms
@@ -121,25 +127,25 @@ int main(int argc, char *argv[])
           //alocate space for wordArray
           wordArray=(char **)malloc(sizeof(char*)*maxArraySize);
           //create, open file pointer
-          fp = fopen("last_name.txt", "r");
+          nfp = fopen("last_name.txt", "r");
 
 
           //for each slot in wordArray
           for(i=0;i<maxArraySize;++i){
             //read word from file to bufferClear
             //get word size
-            wordSize = readFileLine(fp, charBuffer, 100);
+            wordSize = readFileLine(nfp, charBuffer, 100);
 
             //point temp to block of memory equal to size of words
             wordArray[i] = (char *)malloc(sizeof(char)*maxArraySize);
 
-            //copy values from charBuffer to wordArray;
+            //copy values from cha,rBuffer to wordArray;
             for(j=0;j<wordSize;++j){
               wordArray[i][j] = charBuffer[j];
             }
           }
           //close file
-          fclose(fp);
+          fclose(nfp);
           //sort wordArray
           quickStrSort(wordArray, 0, maxArraySize-1);
 
@@ -151,6 +157,7 @@ int main(int argc, char *argv[])
         //get desired name from terminal
           printf("Enter name to search.\n");
           scanf("%*c");
+          scanf("%*c");
           scanf("%s", charTarget);
 
           printf("Name selected: %s\n", charTarget);
@@ -161,11 +168,20 @@ int main(int argc, char *argv[])
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
-            printf("Running Linear String Search\n");
+            fprintf(ofp,"Linear String Search\n");
             //Run linear sort get times
             //search for charTarget
             //targetLocation = biStringArraySearch(wordArray, 10, charTarget);
-            int targetLocation = linStringArraySearch(wordArray, arraySize, charTarget);
+            total_t=0;
+            for(i=0; i<5; ++i){
+              start_t = clock();
+              int targetLocation = linStringArraySearch(wordArray, arraySize, charTarget);
+              end_t = clock();
+              run_t = (long double)(end_t - start_t);
+              total_t+=run_t;
+              fprintf(ofp, "Time %d: %Le, ", i, run_t / CLOCKS_PER_SEC);
+           }
+           fprintf(ofp,"\nAverage: %Le\n", total_t / 5 / CLOCKS_PER_SEC);
 
             if(targetLocation!=-1){
               printf("Found %s, at index %d\n", wordArray[targetLocation], targetLocation);
@@ -241,6 +257,7 @@ int main(int argc, char *argv[])
   //
   // recomend which searching algorithm
 
+//close output file
 
 //free wordArray Memeory if it has been opened
   if(wordArray!=NULL){
