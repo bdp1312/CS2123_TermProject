@@ -57,6 +57,8 @@ void processCommands(int argc, char *argv[])
   }
 }
 
+// void getTimes(int arraySize, char dataType, char searchType){}
+
 
 
 /*MAIN STARTS HERE*/
@@ -68,11 +70,10 @@ int main(int argc, char *argv[])
   int i, j, wordSize, targetLocation, intTarget, temp;
   int exit = 1; //exit variable set to 1(=false)
   char dataType, searchType;
-  char *charTarget;
+  char charTarget[30];
   int arraySize;
   //allocate wordArray pointer, set to NULL
   char **wordArray=NULL;
-<<<<<<< HEAD
   //allocate intArray pointer, set to NULL
   int *intArray = NULL;
   //create a buffer to read words from file to
@@ -116,43 +117,51 @@ int main(int argc, char *argv[])
           scanf("%*c");
           scanf("%d", &intTarget);
 
-          printf("number entered: %d\n", intTarget);
-
+          fprintf(ofp, "Number entered: %d\n", intTarget);
+          
           printf("Enter search type: 'L' for linear or 'B' for binary\n");
           scanf("%*c");
           scanf("%c", &searchType);
 
           if(toupper(searchType) == 'L')
           {
-            printf("Running Linear Int Search\n");
+            fprintf(ofp,"Linear Int Search, Array size: %d\n", arraySize);
 
-            int targetLocation = linIntArraySearch(intArray, arraySize, intTarget);
-
-            if(targetLocation != -1)
-            {
-                printf("%d found at %d\n", intTarget, targetLocation);
-            }
-            else
-            {
-                printf("%d not found\n", intTarget);
-            }
+            total_t=0;
+            for(i=0; i<5; ++i){
+              start_t = clock();
+              targetLocation = linIntArraySearch(intArray, arraySize, intTarget);
+              end_t = clock();
+              run_t = (long double)(end_t - start_t);
+              total_t+=run_t;
+              fprintf(ofp, "Time %d: %Le s, ", i+1, run_t / CLOCKS_PER_SEC);
+           }
+           fprintf(ofp,"\nAverage: %Le s\n", total_t / 5 / CLOCKS_PER_SEC);
+           if(targetLocation!=-1){
+             fprintf(ofp, "Found %d, at index %d\n\n", intArray[targetLocation], targetLocation);
+           } else {
+             fprintf(ofp, "%d not found.\n\n", intTarget);
+           }
           }
           else if(toupper(searchType) == 'B')
           {
-            printf("Running Bianary Int Search\n");
+            fprintf(ofp,"Bianary Int Search, Array size: %d\n", arraySize);
 
-            quickIntSort(intArray, 0, arraySize);
-
-            int targetLocation = linIntArraySearch(intArray, arraySize, intTarget);
-
-            if(targetLocation != -1)
-            {
-                printf("%d found at %d\n", intTarget, targetLocation);
-            }
-            else
-            {
-                printf("%d not found\n", intTarget);
-            }
+            total_t=0;
+            for(i=0; i<5; ++i){
+              start_t = clock();
+              targetLocation = biIntArraySearch(intArray, arraySize, intTarget);
+              end_t = clock();
+              run_t = (long double)(end_t - start_t);
+              total_t+=run_t;
+              fprintf(ofp, "Time %d: %Le s, ", i+1, run_t / CLOCKS_PER_SEC);
+           }
+           fprintf(ofp,"\nAverage: %Le s\n", total_t / 5 / CLOCKS_PER_SEC);
+           if(targetLocation!=-1){
+             fprintf(ofp, "Found %d, at index %d\n\n", intArray[targetLocation], targetLocation);
+           } else {
+             fprintf(ofp, "%d not found.\n\n", intTarget);
+           }
           }
           else
           {
@@ -202,7 +211,7 @@ int main(int argc, char *argv[])
           scanf("%*c");
           scanf("%s", charTarget);
 
-          printf("Name selected: %s\n", charTarget);
+          fprintf(ofp, "Name selected: %s\n", charTarget);
 
 
           printf("Enter search type: 'L' for linear or 'B' for binary\n");
@@ -210,41 +219,53 @@ int main(int argc, char *argv[])
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
-            fprintf(ofp,"Linear String Search\n");
+            fprintf(ofp,"Linear String Search, Array size: %d\n", arraySize);
             //Run linear sort get times
             //search for charTarget
             //targetLocation = biStringArraySearch(wordArray, 10, charTarget);
             total_t=0;
             for(i=0; i<5; ++i){
               start_t = clock();
-              int targetLocation = linStringArraySearch(wordArray, arraySize, charTarget);
+              targetLocation = linStringArraySearch(wordArray, arraySize, charTarget);
               end_t = clock();
               run_t = (long double)(end_t - start_t);
               total_t+=run_t;
-              fprintf(ofp, "Time %d: %Le, ", i, run_t / CLOCKS_PER_SEC);
+              fprintf(ofp, "Time %d: %Le s, ", i+1, run_t / CLOCKS_PER_SEC);
            }
-           fprintf(ofp,"\nAverage: %Le\n", total_t / 5 / CLOCKS_PER_SEC);
+           fprintf(ofp,"\nAverage: %Le s\n", total_t / 5 / CLOCKS_PER_SEC);
 
             if(targetLocation!=-1){
-              printf("Found %s, at index %d\n", wordArray[targetLocation], targetLocation);
+              fprintf(ofp, "Found %s, at index %d\n\n", wordArray[targetLocation], targetLocation);
             } else {
-              printf("%s not found.\n", charTarget);
+              fprintf(ofp, "%s not found.\n\n", charTarget);
             }
 
           }
           else if(toupper(searchType) == 'B')
           {
-            printf("Running Bianary string Search\n");
-            //Run linear sort get times
-            //search for charTarget
-            targetLocation = biStringArraySearch(wordArray, arraySize, charTarget);
-            // int targetLocation = linStringArraySearch(wordArray, 10, charTarget);
+            fprintf(ofp,"Bianary String Search, Array size: %d\n", arraySize);
+            //Run Bianary sort, get times
+            total_t=0;
+            for(i=0; i<5; ++i){
+              start_t = clock();
+
+              //search for charTarget
+              targetLocation = biStringArraySearch(wordArray, arraySize, charTarget);
+              // int targetLocation = linStringArraySearch(wordArray, 10, charTarget);
+
+              end_t = clock();
+              run_t = (long double)(end_t - start_t);
+              total_t+=run_t;
+              fprintf(ofp, "Time %d: %Le s, ", i+1, run_t / CLOCKS_PER_SEC);
+            }
+            fprintf(ofp,"\nAverage: %Le s\n", total_t / 5 / CLOCKS_PER_SEC);
 
             if(targetLocation!=-1){
-              printf("Found %s, at index %d\n", wordArray[targetLocation], targetLocation);
+              fprintf(ofp, "Found %s, at index %d\n\n", wordArray[targetLocation], targetLocation);
             } else {
-              printf("%s not found.\n", charTarget);
+              fprintf(ofp, "%s not found.\n\n", charTarget);
             }
+
 
           }
           else
