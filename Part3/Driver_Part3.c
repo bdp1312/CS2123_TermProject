@@ -5,15 +5,43 @@
 #include<time.h>
 #include <ctype.h>
 
+#include"Searches.h"
+#include "QuickSort.h"
+
+
+
 //#include "Searches.h"
 
 //helper functions to run sorts and get times
 int minArraySize = 1000;
-int maxArraySize = 500000;
+int maxArraySize = 75000;
 int *arraySizes;
 int numArraySizes;
 int dataMode;// set to 0 for int,
 
+//reads from filePointer fp until reaches '\n' or '\0' character, or size of buffer is reached.
+//returns size of word stored in buffer
+//if a line in a file is longer than bufferSize-1 line will be returned as multiple words
+int readFileLine(FILE *fp, char *buffer, int bufferSize)
+{
+
+  int i, j, wordSize;
+  char *charTarget; //
+  char temp;
+  for(i=0;i<bufferSize-1;++i){
+    temp = fgetc(fp);
+    while(temp == '\r'){temp=fgetc(fp);}
+    if(temp=='\0' || temp=='\n'){
+      break;
+    }
+    buffer[i]=temp;
+  }
+  buffer[i]='\0';
+  return ++i;
+}
+
+//takes arguments for list of array sizes from terminal,
+//formats them as array[int], uses existing pointer arraySizes
 void processCommands(int argc, char *argv[])
 {
   int i, temp;
@@ -30,12 +58,24 @@ void processCommands(int argc, char *argv[])
   }
 }
 
+
+
+/*MAIN STARTS HERE*/
+
 int main(int argc, char *argv[])
 {
+  int i, j, wordSize, targetLocation, intTarget;
   int exit = 1; //exit variable set to 1(=false)
-  char dataType;
-  char searchType;
+  char dataType, searchType;
+  char *charTarget;
   int arraySize;
+  //allocate wordArray pointer, set to NULL
+  char **wordArray=NULL;
+  //create a buffer to read words from file to
+  char charBuffer[100];
+  //create file pointer fp
+  FILE *fp;
+
   //processCommands(argc, argv);
   // Create menu for diferant searching algorithms
   while(exit == 1)//main menue loop
@@ -73,22 +113,88 @@ int main(int argc, char *argv[])
       }
       else if(toupper(dataType) == 'C')
       {
+        /*create array of char* of length maxArraySize,
+        populate with first maxArraySize names from file.*/
+        //do this only if wordArray hasn't been created.
+        if(wordArray == NULL){
+
+          //alocate space for wordArray
+          wordArray=(char **)malloc(sizeof(char*)*maxArraySize);
+          //create, open file pointer
+          fp = fopen("last_name.txt", "r");
+
+
+          //for each slot in wordArray
+          for(i=0;i<maxArraySize;++i){
+            //read word from file to bufferClear
+            //get word size
+            wordSize = readFileLine(fp, charBuffer, 100);
+
+            //point temp to block of memory equal to size of words
+            wordArray[i] = (char *)malloc(sizeof(char)*maxArraySize);
+
+            //copy values from charBuffer to wordArray;
+            for(j=0;j<wordSize;++j){
+              wordArray[i][j] = charBuffer[j];
+            }
+          }
+          //close file
+          fclose(fp);
+          //sort wordArray
+          quickStrSort(wordArray, 0, maxArraySize-1);
+
+        }
+
+
+
+        //prompt user for search charTarget
+        //get desired name from terminal
+          printf("Enter name to search.\n");
+          scanf("%*c");
+          scanf("%s", charTarget);
+
+          printf("Name selected: %s\n", charTarget);
+
+
           printf("Enter search type: 'L' for linear or 'B' for binary\n");
           scanf("%*c");
           scanf("%c", &searchType);
           if(toupper(searchType) == 'L')
           {
             printf("Running Linear String Search\n");
+            //Run linear sort get times
+            //search for charTarget
+            //targetLocation = biStringArraySearch(wordArray, 10, charTarget);
+            int targetLocation = linStringArraySearch(wordArray, arraySize, charTarget);
+
+            if(targetLocation!=-1){
+              printf("Found %s, at index %d\n", wordArray[targetLocation], targetLocation);
+            } else {
+              printf("%s not found.\n", charTarget);
+            }
+
           }
           else if(toupper(searchType) == 'B')
           {
             printf("Running Bianary string Search\n");
+            //Run linear sort get times
+            //search for charTarget
+            targetLocation = biStringArraySearch(wordArray, arraySize, charTarget);
+            // int targetLocation = linStringArraySearch(wordArray, 10, charTarget);
+
+            if(targetLocation!=-1){
+              printf("Found %s, at index %d\n", wordArray[targetLocation], targetLocation);
+            } else {
+              printf("%s not found.\n", charTarget);
+            }
+
           }
           else
           {
               printf("Invalid search type\n");
               break;
           }
+
       }
       else
       {
@@ -134,6 +240,17 @@ int main(int argc, char *argv[])
   // analize times and the algorithm's big o notation
   //
   // recomend which searching algorithm
+
+
+//free wordArray Memeory if it has been opened
+  if(wordArray!=NULL){
+    for(i=0;i<arraySize;++i){
+      free(wordArray[i]); //Free each word in wordArray
+      wordArray[i]=NULL;
+    }
+    free(wordArray); //free wordArray pointer itself
+    wordArray=NULL;
+  }
 
 
   return 0;
