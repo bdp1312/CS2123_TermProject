@@ -158,6 +158,7 @@ int main(int argc, char *argv[])
           printf("Enter name to search.\n");
           scanf("%*c");
           scanf("%*c");
+          scanf("%*c");
           scanf("%s", charTarget);
 
           printf("Name selected: %s\n", charTarget);
