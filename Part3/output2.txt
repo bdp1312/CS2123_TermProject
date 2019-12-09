@@ -1,0 +1,18 @@
+Name selected: GITARGY
+Linear String Search, Array size: 75000
+Time 1: 1.557400e-02 s, Time 2: 1.306300e-02 s, Time 3: 1.354700e-02 s, Time 4: 1.200700e-02 s, Time 5: 1.202700e-02 s, 
+Average: 1.324360e-02 s
+GITARGY not found.
+
+Name selected: GITARGY
+Linear String Search, Array size: 10000
+Time 1: 2.119000e-03 s, Time 2: 1.899000e-03 s, Time 3: 1.463000e-03 s, Time 4: 1.463000e-03 s, Time 5: 1.545000e-03 s, 
+Average: 1.697800e-03 s
+GITARGY not found.
+
+Name selected: GITARGY
+Linear String Search, Array size: 1000
+Time 1: 2.290000e-04 s, Time 2: 6.500000e-05 s, Time 3: 6.300000e-05 s, Time 4: 6.200000e-05 s, Time 5: 6.200000e-05 s, 
+Average: 9.620000e-05 s
+GITARGY not found.
+

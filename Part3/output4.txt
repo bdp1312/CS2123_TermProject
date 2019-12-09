@@ -1,0 +1,18 @@
+Name selected: ADAMS
+Linear String Search, Array size: 75000
+Time 1: 6.300000e-05 s, Time 2: 7.000000e-06 s, Time 3: 6.000000e-06 s, Time 4: 6.000000e-06 s, Time 5: 7.000000e-06 s, 
+Average: 1.780000e-05 s
+Found ADAMS, at index 203
+
+Name selected: ADAMS
+Linear String Search, Array size: 10000
+Time 1: 7.200000e-05 s, Time 2: 1.100000e-05 s, Time 3: 1.000000e-05 s, Time 4: 1.000000e-05 s, Time 5: 1.000000e-05 s, 
+Average: 2.260000e-05 s
+Found ADAMS, at index 203
+
+Name selected: ADAMS
+Linear String Search, Array size: 1000
+Time 1: 7.400000e-05 s, Time 2: 1.100000e-05 s, Time 3: 1.000000e-05 s, Time 4: 1.000000e-05 s, Time 5: 1.000000e-05 s, 
+Average: 2.300000e-05 s
+Found ADAMS, at index 203
+
